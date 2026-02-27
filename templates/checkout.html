@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sacola • Sensuale Fitness</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<main class="bag-page">
+  <div class="bag-wrap">
+
+    <header class="bag-head">
+      <h1 class="bag-title">Sacola</h1>
+      <div class="bag-meta">{{ itens|length }} item(ns)</div>
+    </header>
+
+    {% if itens|length == 0 %}
+      <div class="bag-empty">
+        <p>Sua sacola está vazia.</p>
+        <a class="bag-link" href="{{ url_for('home') }}">Continuar comprando</a>
+      </div>
+    {% else %}
+
+    <div class="bag-grid">
+
+      <!-- LISTA -->
+      <section class="bag-list">
+        {% for i in itens %}
+        <article class="bag-item">
+
+          <div class="bag-img">
+            <img src="{{ url_for('static', filename='img/' ~ i.img) }}"
+                 alt="{{ i.nome }}"
+                 onerror="this.src='https://via.placeholder.com/300x400'">
+          </div>
+
+          <div class="bag-info">
+            <div class="bag-top">
+              <h3 class="bag-name">{{ i.nome }}</h3>
+              <div class="bag-price">R$ {{ '%.2f'|format(i.preco) }}</div>
+            </div>
+
+            <div class="bag-tags">
+              <span class="bag-tag">Tamanho: <strong>{{ i.tamanho }}</strong></span>
+              <span class="bag-tag">Qtd: <strong>{{ i.qty }}</strong></span>
+            </div>
+
+            <div class="bag-bottom">
+              <div class="bag-subtotal">
+                Subtotal: <strong>R$ {{ '%.2f'|format(i.subtotal) }}</strong>
+              </div>
+
+              <div class="bag-actions">
+
+                <form method="POST" action="{{ url_for('cart_dec', pid=i.id, tamanho=i.tamanho) }}">
+                  <button class="qty-btn" type="submit" title="Diminuir">−</button>
+                </form>
+
+                <form method="POST" action="{{ url_for('cart_inc', pid=i.id, tamanho=i.tamanho) }}">
+                  <button class="qty-btn" type="submit" title="Aumentar">+</button>
+                </form>
+
+                <form method="POST" action="{{ url_for('cart_remove', pid=i.id, tamanho=i.tamanho) }}">
+                  <button class="remove-btn" type="submit">Remover</button>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+        </article>
+        {% endfor %}
+      </section>
+
+      <!-- RESUMO -->
+      <aside class="bag-summary">
+        <div class="sum-card">
+          <h2 class="sum-title">Resumo</h2>
+
+          <div class="sum-row">
+            <span>Subtotal</span>
+            <strong>R$ {{ '%.2f'|format(total) }}</strong>
+          </div>
+
+          <div class="sum-row muted">
+            <span>Frete</span>
+            <span>Calculado no pagamento</span>
+          </div>
+
+          <div class="sum-divider"></div>
+
+          <div class="sum-total">
+            <span>Total</span>
+            <strong>R$ {{ '%.2f'|format(total) }}</strong>
+          </div>
+
+          <a href="{{ url_for('finalizar') }}" class="sum-btn">
+  Finalizar compra
+</a>
+          <a class="bag-link" href="{{ url_for('home') }}">Continuar comprando</a>
+        </div>
+      </aside>
+
+    </div>
+
+    {% endif %}
+  </div>
+</main>
+
+</body>
+</html>
