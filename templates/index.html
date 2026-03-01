@@ -101,11 +101,34 @@
           </div>
 
           <div class="product-body">
-            <h2 class="product-title">{{ p.nome }}</h2>
-            <div class="product-price">R$ {{ '%.2f'|format(p.preco) }}</div>
+  <h2 class="product-title">{{ p.nome }}</h2>
+  <div class="product-price">R$ {{ '%.2f'|format(p.preco) }}</div>
 
+  <form class="add-to-cart-form" method="POST" action="{{ url_for('add_to_cart', pid=p.id) }}">
+    <div class="sizes">
+      <span class="sizes-label">Tamanho</span>
+
+      <div class="sizes-row">
+        {% for t in (p.tamanhos.split(",") if p.tamanhos else ["P","M","G","GG"]) %}
+          {% set tt = t.strip() %}
+          <input
+            class="size-radio"
+            type="radio"
+            name="tamanho"
+            id="t{{ p.id }}-{{ tt }}"
+            value="{{ tt }}"
+            required
+          >
+          <label class="size-chip" for="t{{ p.id }}-{{ tt }}">{{ tt }}</label>
+        {% endfor %}
+      </div>
+    </div>
+
+    <button class="btn" type="submit">Adicionar à sacola</button>
+  </form>
+</div>
           
-      
+    
 
  <form class="add-to-cart-form" method="POST" action="{{ url_for('add_to_cart', pid=p.id) }}">
   <div class="sizes">
@@ -128,7 +151,7 @@
 
   <button class="btn" type="submit">Adicionar à sacola</button>
 </form>
-            </form>
+          
           </div>
 
         </article>
