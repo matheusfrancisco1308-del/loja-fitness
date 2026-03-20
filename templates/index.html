@@ -6,7 +6,7 @@
   <title>Sensuale Fitness</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=30">
 </head>
 <body>
 
@@ -59,22 +59,22 @@
 
       <div class="brand-filter">
         <a class="brand-btn {{ 'active' if not marca_selecionada else '' }}"
-           href="{{ '/' if categoria == 'Feminino' else '/masculino' }}">
+           href="{{ '/' if categoria=='Feminino' else '/masculino' }}">
           Todas
         </a>
 
-        <a class="brand-btn {{ 'active' if marca_selecionada == 'LIVE!' else '' }}"
-           href="{{ ('/' if categoria == 'Feminino' else '/masculino') ~ '?marca=LIVE!' }}">
+        <a class="brand-btn {{ 'active' if marca_selecionada=='LIVE!' else '' }}"
+           href="{{ ('/' if categoria=='Feminino' else '/masculino') ~ '?marca=LIVE!' }}">
           LIVE!
         </a>
 
-        <a class="brand-btn {{ 'active' if marca_selecionada == 'CAJU BRASIL' else '' }}"
-           href="{{ ('/' if categoria == 'Feminino' else '/masculino') ~ '?marca=CAJU BRASIL' }}">
+        <a class="brand-btn {{ 'active' if marca_selecionada=='CAJU BRASIL' else '' }}"
+           href="{{ ('/' if categoria=='Feminino' else '/masculino') ~ '?marca=CAJU BRASIL' }}">
           CAJU BRASIL
         </a>
 
-        <a class="brand-btn {{ 'active' if marca_selecionada == 'LUPO' else '' }}"
-           href="{{ ('/' if categoria == 'Feminino' else '/masculino') ~ '?marca=LUPO' }}">
+        <a class="brand-btn {{ 'active' if marca_selecionada=='LUPO' else '' }}"
+           href="{{ ('/' if categoria=='Feminino' else '/masculino') ~ '?marca=LUPO' }}">
           LUPO
         </a>
       </div>
@@ -124,9 +124,6 @@
   </div>
 </main>
 
-<script src="{{ url_for('static', filename='js/script.js') }}?v=20"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}?v=30"></script>
 </body>
-<div style="background:red;color:white;padding:20px;font-size:30px;text-align:center;">
-  TESTE NOVO 123
-</div>
 </html>
